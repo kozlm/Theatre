@@ -1,11 +1,10 @@
-package com.github.kozlm.theatre.model;
+package com.github.kozlm.theatre.model.play;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.sql.Date;
 import java.sql.Time;
 
 @Data

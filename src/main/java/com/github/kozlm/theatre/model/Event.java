@@ -1,8 +1,8 @@
 package com.github.kozlm.theatre.model;
 
+import com.github.kozlm.theatre.model.play.Play;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Future;
-import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import lombok.NoArgsConstructor;

@@ -1,4 +1,4 @@
-package com.github.kozlm.theatre.model;
+package com.github.kozlm.theatre.model.play;
 
 public enum AgeClassification {
     U,

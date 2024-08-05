@@ -1,5 +1,6 @@
 package com.github.kozlm.theatre.model;
 
+import com.github.kozlm.theatre.model.client.Client;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
@@ -7,7 +8,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
-import java.sql.Date;
 
 @Data
 @NoArgsConstructor
