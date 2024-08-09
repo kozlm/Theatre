@@ -1,4 +1,4 @@
-package com.github.kozlm.theatre.controller;
+package com.github.kozlm.theatre.service;
 
 import com.github.kozlm.theatre.model.client.Address;
 import com.github.kozlm.theatre.model.client.Client;

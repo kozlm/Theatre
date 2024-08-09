@@ -1,0 +1,42 @@
+package com.github.kozlm.theatre.service;
+
+import com.github.kozlm.theatre.model.play.Play;
+import com.github.kozlm.theatre.repository.PlayRepository;
+import jakarta.transaction.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+public class PlayService {
+    private final PlayRepository playRepository;
+
+    @Autowired
+    public PlayService(PlayRepository playRepository){
+        this.playRepository = playRepository;
+    }
+
+    public Play getPlayById(Long id){
+        return playRepository.findById(id).orElseThrow(() ->
+                new IllegalArgumentException("Did not find play with id: " + id));
+    }
+
+    public void removePlayById(Long id){
+        playRepository.deleteById(id);
+    }
+
+    public void addPlay(Play dto){
+        playRepository.save(dto);
+    }
+
+    @Transactional
+    public void updatePlay(Long id, Play dto){
+        Play play = getPlayById(id);
+
+        play.setName(dto.getName());
+        play.setDescription(dto.getDescription());
+        play.setDuration(dto.getDuration());
+        play.setClassification(dto.getClassification());
+
+        playRepository.save(play);
+    }
+}

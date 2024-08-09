@@ -15,6 +15,8 @@ import java.util.Date;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity
 public class Event {
     @Id
