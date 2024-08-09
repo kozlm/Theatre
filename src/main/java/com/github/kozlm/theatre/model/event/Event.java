@@ -1,9 +1,12 @@
-package com.github.kozlm.theatre.model;
+package com.github.kozlm.theatre.model.event;
 
+import com.github.kozlm.theatre.model.Hall;
 import com.github.kozlm.theatre.model.play.Play;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -20,8 +23,6 @@ public class Event {
     @Column(name = "EventId")
     private Long id;
 
-    @NotBlank
-    @Future
     @Column(name = "StartDate")
     private Date startDate;
 
@@ -29,9 +30,7 @@ public class Event {
     @JoinColumn(name = "HallId", referencedColumnName = "HallId")
     private Hall hall;
 
-    @NotBlank
     @ManyToOne
     @JoinColumn(name = "PlayId", referencedColumnName = "PlayId", nullable = false)
     private Play play;
-
 }
