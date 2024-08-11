@@ -9,7 +9,8 @@ import java.util.Date;
 
 @Data
 @FieldsEmptyOrFilled(
-        fieldNames = {"postalCode", "buildingNumber", "street", "city"}
+        necessaryFieldNames = {"postalCode", "buildingNumber", "street", "city"},
+        nonNecessaryFieldNames = {"roomNumber"}
 )
 public class ClientDto {
     @NotBlank

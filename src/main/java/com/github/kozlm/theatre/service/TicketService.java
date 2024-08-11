@@ -9,6 +9,8 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class TicketService {
     private final TicketRepository ticketRepository;
@@ -29,6 +31,10 @@ public class TicketService {
     public Ticket getTicketById(Long id){
         return ticketRepository.findById(id).orElseThrow(() ->
                 new IllegalArgumentException("Did not find ticket with id: " + id));
+    }
+
+    public List<Ticket> getTickets(){
+        return ticketRepository.findAll();
     }
 
     public void removeTicketById(Long id){

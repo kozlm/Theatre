@@ -6,6 +6,8 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class PlayService {
     private final PlayRepository playRepository;
@@ -18,6 +20,10 @@ public class PlayService {
     public Play getPlayById(Long id){
         return playRepository.findById(id).orElseThrow(() ->
                 new IllegalArgumentException("Did not find play with id: " + id));
+    }
+
+    public List<Play> getPlays(){
+        return playRepository.findAll();
     }
 
     public void removePlayById(Long id){

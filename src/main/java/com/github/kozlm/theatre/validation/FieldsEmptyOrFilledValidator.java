@@ -8,11 +8,13 @@ import java.lang.reflect.Field;
 public class FieldsEmptyOrFilledValidator
         implements ConstraintValidator<FieldsEmptyOrFilled, Object> {
 
-    private String[] fieldNames;
+    private String[] necessaryFieldNames;
+    private String[] nonNecessaryFieldNames;
 
     @Override
     public void initialize(FieldsEmptyOrFilled constraintAnnotation) {
-        this.fieldNames = constraintAnnotation.fieldNames();
+        this.necessaryFieldNames = constraintAnnotation.necessaryFieldNames();
+        this.nonNecessaryFieldNames = constraintAnnotation.nonNecessaryFieldNames();
     }
 
     @Override
@@ -21,7 +23,7 @@ public class FieldsEmptyOrFilledValidator
             boolean allEmpty = true;
             boolean allFilled = true;
 
-            for (String fieldName : fieldNames) {
+            for (String fieldName : necessaryFieldNames) {
                 Field field = value.getClass().getDeclaredField(fieldName);
                 field.setAccessible(true);
                 Object fieldValue = field.get(value);
@@ -30,6 +32,16 @@ public class FieldsEmptyOrFilledValidator
                     allEmpty = false;
                 } else {
                     allFilled = false;
+                }
+            }
+
+            for (String fieldName : nonNecessaryFieldNames) {
+                Field field = value.getClass().getDeclaredField(fieldName);
+                field.setAccessible(true);
+                Object fieldValue = field.get(value);
+
+                if (fieldValue != null && !fieldValue.toString().isEmpty()) {
+                    allEmpty = false;
                 }
             }
 

@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ClientService {
     private final ClientRepository clientRepository;
@@ -30,6 +32,10 @@ public class ClientService {
     public Client getClientById(Long id){
         return clientRepository.findById(id).orElseThrow(() ->
                 new IllegalArgumentException("Did not find client with id: " + id));
+    }
+
+    public List<Client> getClients(){
+        return clientRepository.findAll();
     }
 
     public void removeClientById(Long id){

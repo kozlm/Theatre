@@ -16,5 +16,6 @@ public @interface FieldsEmptyOrFilled {
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 
-    String[] fieldNames();
+    String[] necessaryFieldNames();
+    String[] nonNecessaryFieldNames();
 }

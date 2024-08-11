@@ -9,6 +9,8 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class EventService {
     private final EventRepository eventRepository;
@@ -29,6 +31,10 @@ public class EventService {
     public Event getEventById(Long id){
         return eventRepository.findById(id).orElseThrow(() ->
                 new IllegalArgumentException("Did not find event with id: " + id));
+    }
+
+    public List<Event> getEvents(){
+        return eventRepository.findAll();
     }
 
     public void removeEventById(Long id){

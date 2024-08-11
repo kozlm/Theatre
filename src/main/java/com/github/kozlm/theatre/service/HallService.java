@@ -6,6 +6,8 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class HallService {
     private final HallRepository hallRepository;
@@ -18,6 +20,10 @@ public class HallService {
     public Hall getHallById(Long id){
         return hallRepository.findById(id).orElseThrow(() ->
                 new IllegalArgumentException("Did not find hall with id: " + id));
+    }
+
+    public List<Hall> getHalls(){
+        return hallRepository.findAll();
     }
 
     public void removeHallById(Long id){
