@@ -19,7 +19,7 @@ public class ClientDto {
     @NotBlank
     private String surname;
 
-    @NotBlank
+    @NotNull
     private Gender gender;
 
     @NotBlank

@@ -39,7 +39,8 @@ public class ClientService {
     }
 
     public void removeClientById(Long id){
-        clientRepository.deleteById(id);
+        Client client = getClientById(id);
+        clientRepository.delete(client);
     }
 
     public void addClient(ClientDto dto){

@@ -1,6 +1,7 @@
 package com.github.kozlm.theatre.service;
 
 import com.github.kozlm.theatre.model.Hall;
+import com.github.kozlm.theatre.model.event.Event;
 import com.github.kozlm.theatre.repository.HallRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,8 @@ public class HallService {
     }
 
     public void removeHallById(Long id){
-        hallRepository.deleteById(id);
+        Hall hall = getHallById(id);
+        hallRepository.delete(hall);
     }
 
     public void addHall(Hall dto){

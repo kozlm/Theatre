@@ -1,5 +1,6 @@
 package com.github.kozlm.theatre.service;
 
+import com.github.kozlm.theatre.model.event.Event;
 import com.github.kozlm.theatre.model.play.Play;
 import com.github.kozlm.theatre.repository.PlayRepository;
 import jakarta.transaction.Transactional;
@@ -27,7 +28,8 @@ public class PlayService {
     }
 
     public void removePlayById(Long id){
-        playRepository.deleteById(id);
+        Play play = getPlayById(id);
+        playRepository.delete(play);
     }
 
     public void addPlay(Play dto){

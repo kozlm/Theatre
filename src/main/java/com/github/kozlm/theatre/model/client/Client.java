@@ -39,7 +39,7 @@ public class Client {
     @Column(name = "DateOfBirth")
     private Date dateOfBirth;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "AddressId", referencedColumnName = "AddressId")
     private Address address;
 }

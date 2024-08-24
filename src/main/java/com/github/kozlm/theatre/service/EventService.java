@@ -38,7 +38,8 @@ public class EventService {
     }
 
     public void removeEventById(Long id){
-        eventRepository.deleteById(id);
+        Event event = getEventById(id);
+        eventRepository.delete(event);
     }
 
     public void addEvent(EventDto dto){
