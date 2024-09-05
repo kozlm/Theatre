@@ -13,11 +13,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/v1/auth")
 @RequiredArgsConstructor
 public class AuthenticationController {
-    AuthenticationService authenticationService;
-    ClientService clientService;
+    private final AuthenticationService authenticationService;
+    private final ClientService clientService;
 
     @PostMapping("/register")
     @ResponseStatus(HttpStatus.OK)

@@ -1,9 +1,10 @@
-package com.github.kozlm.theatre.controller;
+package com.github.kozlm.theatre.controller.management;
 
 import com.github.kozlm.theatre.model.ticket.Ticket;
 import com.github.kozlm.theatre.model.ticket.TicketDto;
 import com.github.kozlm.theatre.service.TicketService;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -11,14 +12,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/tickets")
+@RequestMapping(path = "/v1/management/tickets")
+@RequiredArgsConstructor
 public class TicketController {
     private final TicketService ticketService;
-
-    @Autowired
-    public TicketController(TicketService ticketService){
-        this.ticketService = ticketService;
-    }
 
     @GetMapping
     public List<Ticket> getTickets(){

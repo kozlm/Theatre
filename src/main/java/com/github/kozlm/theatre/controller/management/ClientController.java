@@ -1,9 +1,10 @@
-package com.github.kozlm.theatre.controller;
+package com.github.kozlm.theatre.controller.management;
 
 import com.github.kozlm.theatre.model.client.Client;
 import com.github.kozlm.theatre.model.client.ClientDto;
 import com.github.kozlm.theatre.service.ClientService;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -11,14 +12,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/clients")
+@RequestMapping(path = "/v1/management/clients")
+@RequiredArgsConstructor
 public class ClientController {
     private final ClientService clientService;
-
-    @Autowired
-    public ClientController(ClientService clientService){
-        this.clientService = clientService;
-    }
 
     @GetMapping
     public List<Client> getClients(){

@@ -1,8 +1,9 @@
-package com.github.kozlm.theatre.controller;
+package com.github.kozlm.theatre.controller.management;
 
 import com.github.kozlm.theatre.model.play.Play;
 import com.github.kozlm.theatre.service.PlayService;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -10,14 +11,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/plays")
+@RequestMapping(path = "/v1/management/plays")
+@RequiredArgsConstructor
 public class PlayController {
     private final PlayService playService;
-
-    @Autowired
-    public PlayController(PlayService playService){
-        this.playService = playService;
-    }
 
     @GetMapping
     public List<Play> getPlays(){

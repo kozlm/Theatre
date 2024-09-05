@@ -1,9 +1,10 @@
-package com.github.kozlm.theatre.controller;
+package com.github.kozlm.theatre.controller.management;
 
 import com.github.kozlm.theatre.model.event.Event;
 import com.github.kozlm.theatre.model.event.EventDto;
 import com.github.kozlm.theatre.service.EventService;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -11,14 +12,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/events")
+@RequestMapping(path = "/v1/management/events")
+@RequiredArgsConstructor
 public class EventController {
     private final EventService eventService;
-
-    @Autowired
-    public EventController(EventService eventService){
-        this.eventService = eventService;
-    }
 
     @GetMapping
     public List<Event> getEvents(){

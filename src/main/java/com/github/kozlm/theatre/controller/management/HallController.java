@@ -1,8 +1,9 @@
-package com.github.kozlm.theatre.controller;
+package com.github.kozlm.theatre.controller.management;
 
 import com.github.kozlm.theatre.model.Hall;
 import com.github.kozlm.theatre.service.HallService;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -10,14 +11,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/halls")
+@RequestMapping(path = "/v1/management/halls")
+@RequiredArgsConstructor
 public class HallController {
     private final HallService hallService;
-
-    @Autowired
-    public HallController(HallService hallService){
-        this.hallService = hallService;
-    }
 
     @GetMapping
     public List<Hall> getHalls(){

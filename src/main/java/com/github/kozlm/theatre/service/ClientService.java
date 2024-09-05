@@ -6,6 +6,7 @@ import com.github.kozlm.theatre.model.client.ClientDto;
 import com.github.kozlm.theatre.repository.AddressRepository;
 import com.github.kozlm.theatre.repository.ClientRepository;
 import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -13,21 +14,11 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class ClientService {
     private final ClientRepository clientRepository;
     private final AddressRepository addressRepository;
     private final PasswordEncoder encoder;
-
-    @Autowired
-    public ClientService(
-            ClientRepository clientRepository,
-            AddressRepository addressRepository,
-            PasswordEncoder encoder
-    ){
-        this.encoder = encoder;
-        this.clientRepository = clientRepository;
-        this.addressRepository = addressRepository;
-    }
 
     public Client getClientById(Long id){
         return clientRepository.findById(id).orElseThrow(() ->
