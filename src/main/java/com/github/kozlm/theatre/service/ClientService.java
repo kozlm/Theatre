@@ -3,11 +3,12 @@ package com.github.kozlm.theatre.service;
 import com.github.kozlm.theatre.model.client.Address;
 import com.github.kozlm.theatre.model.client.Client;
 import com.github.kozlm.theatre.model.client.ClientDto;
+import com.github.kozlm.theatre.model.ticket.Ticket;
 import com.github.kozlm.theatre.repository.AddressRepository;
 import com.github.kozlm.theatre.repository.ClientRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -20,23 +21,37 @@ public class ClientService {
     private final AddressRepository addressRepository;
     private final PasswordEncoder encoder;
 
-    public Client getClientById(Long id){
+    public Client getClientById(Long id) {
         return clientRepository.findById(id).orElseThrow(() ->
                 new IllegalArgumentException("Did not find client with id: " + id));
     }
 
-    public List<Client> getClients(){
+    public List<Ticket> getMyTickets(UserDetails userDetails) {
+        return ((Client) userDetails).getTickets();
+    }
+
+    public Client getMyInformation(UserDetails userDetails) {
+        return ((Client) userDetails);
+    }
+
+    @Transactional
+    public void updateMyInformation(UserDetails userDetails, ClientDto dto) {
+        Long id = ((Client) userDetails).getId();
+        updateClient(id, dto);
+    }
+
+    public List<Client> getClients() {
         return clientRepository.findAll();
     }
 
-    public void removeClientById(Long id){
+    public void removeClientById(Long id) {
         Client client = getClientById(id);
         clientRepository.delete(client);
     }
 
-    public void addClient(ClientDto dto){
+    public void addClient(ClientDto dto) {
         Address address = null;
-        if (dto.getStreet()!=null){
+        if (dto.getStreet() != null) {
             address = Address.builder()
                     .city(dto.getCity())
                     .street(dto.getStreet())
@@ -60,7 +75,7 @@ public class ClientService {
     }
 
     @Transactional
-    public void updateClient(Long id, ClientDto dto){
+    public void updateClient(Long id, ClientDto dto) {
         Client client = getClientById(id);
 
         client.setName(dto.getName());
