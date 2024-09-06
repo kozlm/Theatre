@@ -32,14 +32,14 @@ public class PlayController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void createPlay(@RequestBody @Valid @JsonView(Views.DtoView.class) Play dto) {
+    public void createPlay(@RequestBody @Valid Play dto) {
         playService.addPlay(dto);
     }
 
     @PutMapping(path = "/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void updatePlay(
-            @RequestBody @Valid @JsonView(Views.DtoView.class) Play dto,
+            @RequestBody @Valid Play dto,
             @PathVariable Long id
     ) {
         playService.updatePlay(id, dto);

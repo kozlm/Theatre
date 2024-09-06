@@ -19,7 +19,4 @@ public class Views {
     public interface GuestView extends PlaysGuestView, EventsGuestView {
     }
 
-    public interface DtoView {
-    }
-
 }

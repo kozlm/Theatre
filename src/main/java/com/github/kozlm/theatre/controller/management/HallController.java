@@ -1,7 +1,9 @@
 package com.github.kozlm.theatre.controller.management;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import com.github.kozlm.theatre.model.Hall;
 import com.github.kozlm.theatre.service.HallService;
+import com.github.kozlm.theatre.validation.Views;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +36,10 @@ public class HallController {
 
     @PutMapping(path = "/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateHall(@RequestBody @Valid Hall dto, @PathVariable Long id){
+    public void updateHall(
+            @RequestBody @Valid Hall dto,
+            @PathVariable Long id
+    ){
         hallService.updateHall(id, dto);
     }
 
