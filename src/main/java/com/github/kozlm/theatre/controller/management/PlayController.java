@@ -2,6 +2,7 @@ package com.github.kozlm.theatre.controller.management;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.github.kozlm.theatre.model.play.Play;
+import com.github.kozlm.theatre.model.play.PlayDto;
 import com.github.kozlm.theatre.service.PlayService;
 import com.github.kozlm.theatre.validation.Views;
 import jakarta.validation.Valid;
@@ -32,14 +33,14 @@ public class PlayController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void createPlay(@RequestBody @Valid Play dto) {
+    public void createPlay(@RequestBody @Valid PlayDto dto) {
         playService.addPlay(dto);
     }
 
     @PutMapping(path = "/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void updatePlay(
-            @RequestBody @Valid Play dto,
+            @RequestBody @Valid PlayDto dto,
             @PathVariable Long id
     ) {
         playService.updatePlay(id, dto);

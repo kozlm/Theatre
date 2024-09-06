@@ -5,8 +5,8 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.github.kozlm.theatre.model.event.Event;
 import com.github.kozlm.theatre.validation.Views;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -14,6 +14,8 @@ import java.sql.Time;
 import java.util.List;
 
 @Data
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor
 @JsonView(Views.PlaysAdminView.class)
 @Entity
@@ -24,14 +26,12 @@ public class Play {
     @Column(name = "PlayId")
     private Long id;
 
-    @NotBlank
     @Column(name = "Name", nullable = false)
     private String name;
 
     @Column(name = "Description")
     private String description;
 
-    @NotNull
     @Column(name = "Duration", nullable = false)
     @JsonFormat(shape = JsonFormat.Shape.STRING,
             pattern = "HH:mm:ss")

@@ -2,12 +2,10 @@ package com.github.kozlm.theatre.model.event;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonView;
-import com.github.kozlm.theatre.model.Hall;
+import com.github.kozlm.theatre.model.hall.Hall;
 import com.github.kozlm.theatre.model.play.Play;
 import com.github.kozlm.theatre.validation.Views;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Future;
-import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

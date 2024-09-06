@@ -6,43 +6,33 @@ import com.github.kozlm.theatre.model.ticket.Ticket;
 import com.github.kozlm.theatre.model.ticket.TicketDto;
 import com.github.kozlm.theatre.repository.TicketRepository;
 import jakarta.transaction.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class TicketService {
     private final TicketRepository ticketRepository;
     private final EventService eventService;
     private final ClientService clientService;
 
-    @Autowired
-    public TicketService(
-            TicketRepository ticketRepository,
-            EventService eventService,
-            ClientService clientService
-    ){
-        this.ticketRepository = ticketRepository;
-        this.eventService = eventService;
-        this.clientService = clientService;
-    }
-
-    public Ticket getTicketById(Long id){
+    public Ticket getTicketById(Long id) {
         return ticketRepository.findById(id).orElseThrow(() ->
                 new IllegalArgumentException("Did not find ticket with id: " + id));
     }
 
-    public List<Ticket> getTickets(){
+    public List<Ticket> getTickets() {
         return ticketRepository.findAll();
     }
 
-    public void removeTicketById(Long id){
+    public void removeTicketById(Long id) {
         Ticket ticket = getTicketById(id);
         ticketRepository.delete(ticket);
     }
 
-    public void addTicket(TicketDto dto){
+    public void addTicket(TicketDto dto) {
         Event event = eventService.getEventById(dto.getEventId());
         Client client = clientService.getClientById(dto.getClientId());
 
@@ -56,7 +46,7 @@ public class TicketService {
     }
 
     @Transactional
-    public void updateTicket(Long id, TicketDto dto){
+    public void updateTicket(Long id, TicketDto dto) {
         Event event = eventService.getEventById(dto.getEventId());
         Client client = clientService.getClientById(dto.getClientId());
         Ticket ticket = getTicketById(id);

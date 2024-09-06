@@ -1,32 +1,22 @@
 package com.github.kozlm.theatre.service;
 
-import com.github.kozlm.theatre.model.Hall;
+import com.github.kozlm.theatre.model.hall.Hall;
 import com.github.kozlm.theatre.model.event.Event;
 import com.github.kozlm.theatre.model.event.EventDto;
 import com.github.kozlm.theatre.model.play.Play;
 import com.github.kozlm.theatre.repository.EventRepository;
 import jakarta.transaction.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class EventService {
     private final EventRepository eventRepository;
     private final HallService hallService;
     private final PlayService playService;
-
-    @Autowired
-    public EventService(
-            EventRepository eventRepository,
-            PlayService playService,
-            HallService hallService
-    ){
-        this.eventRepository = eventRepository;
-        this.playService = playService;
-        this.hallService = hallService;
-    }
 
     public Event getEventById(Long id){
         return eventRepository.findById(id).orElseThrow(() ->

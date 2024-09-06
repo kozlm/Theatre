@@ -1,14 +1,14 @@
-package com.github.kozlm.theatre.model;
+package com.github.kozlm.theatre.model.hall;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor
 @Entity
 public class Hall {
@@ -18,13 +18,9 @@ public class Hall {
     @Column(name = "HallId")
     private Long id;
 
-    @NotBlank
     @Column(name = "Name", nullable = false, unique = true)
     private String name;
 
-    @NotBlank
-    @Positive
     @Column(name = "Capacity", nullable = false)
     private Long capacity;
-
 }
