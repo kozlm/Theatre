@@ -1,14 +1,21 @@
 package com.github.kozlm.theatre.model.play;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonView;
+import com.github.kozlm.theatre.model.event.Event;
+import com.github.kozlm.theatre.validation.Views;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Time;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
+@JsonView(Views.PlaysAdminView.class)
 @Entity
 public class Play {
     @Id
@@ -24,11 +31,21 @@ public class Play {
     @Column(name = "Description")
     private String description;
 
-    @NotBlank
+    @NotNull
     @Column(name = "Duration", nullable = false)
+    @JsonFormat(shape = JsonFormat.Shape.STRING,
+            pattern = "HH:mm:ss")
     private Time duration;
 
     @Column(name = "AgeClassification", nullable = false)
     @Enumerated(EnumType.STRING)
     private AgeClassification classification = AgeClassification.U;
+
+    @OneToMany(
+            fetch = FetchType.LAZY,
+            mappedBy = "play",
+            cascade = CascadeType.ALL
+    )
+    @JsonView(Views.PlaysGuestView.class)
+    private List<Event> events;
 }

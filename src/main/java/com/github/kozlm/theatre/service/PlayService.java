@@ -27,6 +27,10 @@ public class PlayService {
         return playRepository.findAll();
     }
 
+    public List<Play> getCurrentPlays(){
+        return playRepository.getCurrentPlays();
+    }
+
     public void removePlayById(Long id){
         Play play = getPlayById(id);
         playRepository.delete(play);

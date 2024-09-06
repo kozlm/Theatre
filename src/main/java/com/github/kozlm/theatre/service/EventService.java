@@ -43,7 +43,8 @@ public class EventService {
     }
 
     public void addEvent(EventDto dto){
-        Hall hall = hallService.getHallById(dto.getHallId());
+        Hall hall = dto.getHallId() == null ?
+                null : hallService.getHallById(dto.getHallId());
         Play play = playService.getPlayById(dto.getPlayId());
 
         Event event = Event.builder()

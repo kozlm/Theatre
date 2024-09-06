@@ -1,7 +1,10 @@
 package com.github.kozlm.theatre.model.event;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonView;
 import com.github.kozlm.theatre.model.Hall;
 import com.github.kozlm.theatre.model.play.Play;
+import com.github.kozlm.theatre.validation.Views;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotBlank;
@@ -17,6 +20,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@JsonView(Views.EventsGuestView.class)
 @Entity
 public class Event {
     @Id
@@ -26,6 +30,8 @@ public class Event {
     private Long id;
 
     @Column(name = "StartDate")
+    @JsonFormat(shape = JsonFormat.Shape.STRING,
+            pattern = "dd-MM-yyyy HH:mm")
     private Date startDate;
 
     @ManyToOne
@@ -34,5 +40,6 @@ public class Event {
 
     @ManyToOne
     @JoinColumn(name = "PlayId", referencedColumnName = "PlayId", nullable = false)
+    @JsonView(Views.EventsAdminView.class)
     private Play play;
 }
