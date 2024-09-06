@@ -8,6 +8,7 @@ import com.github.kozlm.theatre.service.PlayService;
 import com.github.kozlm.theatre.validation.Views;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,6 +19,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class GuestController {
     private final PlayService playService;
+    private final EventService eventService;
 
     @GetMapping(path = "/current-plays")
     @JsonView(Views.AdminView.class)
@@ -29,5 +31,11 @@ public class GuestController {
     @JsonView(Views.GuestView.class)
     public List<Play> getCurrentPlaysWithEvents(){
         return playService.getCurrentPlays();
+    }
+
+    @GetMapping(path = "/current-events/{id}")
+    @JsonView(Views.GuestView.class)
+    public Event getCurrentEvent(@PathVariable Long id){
+        return eventService.getCurrentEventById(id);
     }
 }
