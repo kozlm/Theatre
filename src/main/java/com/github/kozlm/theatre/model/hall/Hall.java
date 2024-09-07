@@ -1,5 +1,7 @@
 package com.github.kozlm.theatre.model.hall;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.github.kozlm.theatre.validation.Views;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -10,6 +12,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonView(Views.DefaultView.class)
 @Entity
 public class Hall {
     @Id

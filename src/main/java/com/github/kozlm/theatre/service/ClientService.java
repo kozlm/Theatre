@@ -6,12 +6,14 @@ import com.github.kozlm.theatre.model.client.ClientDto;
 import com.github.kozlm.theatre.model.ticket.Ticket;
 import com.github.kozlm.theatre.repository.AddressRepository;
 import com.github.kozlm.theatre.repository.ClientRepository;
+import com.github.kozlm.theatre.repository.TicketRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -19,6 +21,7 @@ import java.util.List;
 public class ClientService {
     private final ClientRepository clientRepository;
     private final AddressRepository addressRepository;
+    private final TicketRepository ticketRepository;
     private final PasswordEncoder encoder;
 
     public Client getClientById(Long id) {
@@ -27,7 +30,9 @@ public class ClientService {
     }
 
     public List<Ticket> getMyTickets(UserDetails userDetails) {
-        return ((Client) userDetails).getTickets();
+        Client client = (Client) userDetails;
+        System.out.println(ticketRepository.findByClient(client).size());
+        return ticketRepository.findByClient(client);
     }
 
     public Client getMyInformation(UserDetails userDetails) {

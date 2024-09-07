@@ -1,5 +1,7 @@
 package com.github.kozlm.theatre.model.client;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.github.kozlm.theatre.validation.Views;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -7,9 +9,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@JsonView(Views.DefaultView.class)
 @Entity
 public class Address {
     @Id

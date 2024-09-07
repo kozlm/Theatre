@@ -1,7 +1,9 @@
 package com.github.kozlm.theatre.model.client;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
 import com.github.kozlm.theatre.model.ticket.Ticket;
+import com.github.kozlm.theatre.validation.Views;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -16,6 +18,7 @@ import java.util.List;
 @AllArgsConstructor
 @Data
 @Builder
+@JsonView(Views.DefaultView.class)
 @Entity
 public class Client implements UserDetails {
     @Id

@@ -1,7 +1,9 @@
 package com.github.kozlm.theatre.model.ticket;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import com.github.kozlm.theatre.model.event.Event;
 import com.github.kozlm.theatre.model.client.Client;
+import com.github.kozlm.theatre.validation.Views;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
@@ -15,6 +17,7 @@ import java.math.BigDecimal;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonView(Views.AdminView.class)
 @Builder
 @Entity
 public class Ticket {

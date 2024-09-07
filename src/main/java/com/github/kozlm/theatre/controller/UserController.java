@@ -1,11 +1,13 @@
 package com.github.kozlm.theatre.controller;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import com.github.kozlm.theatre.model.client.Client;
 import com.github.kozlm.theatre.model.client.ClientDto;
 import com.github.kozlm.theatre.model.ticket.BuyTicketRequest;
 import com.github.kozlm.theatre.model.ticket.Ticket;
 import com.github.kozlm.theatre.service.ClientService;
 import com.github.kozlm.theatre.service.TicketService;
+import com.github.kozlm.theatre.validation.Views;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -19,12 +21,12 @@ import java.util.List;
 @RestController
 @RequestMapping(path = "/v1/")
 @RequiredArgsConstructor
-@PreAuthorize("hasRole('CLIENT')")
 public class UserController {
     private final TicketService ticketService;
     private final ClientService clientService;
 
     @GetMapping(path = "/my-tickets")
+    @JsonView(Views.AdminView.class)
     public List<Ticket> getMyTickets
             (@AuthenticationPrincipal UserDetails userDetails) {
         return clientService.getMyTickets(userDetails);

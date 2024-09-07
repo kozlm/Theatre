@@ -57,4 +57,5 @@ public class GlobalExceptionHandler {
                 HttpStatus.NOT_FOUND);
     }
 
+    // todo JWT exceptions
 }
