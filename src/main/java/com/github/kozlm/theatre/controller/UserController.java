@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.github.kozlm.theatre.model.client.Client;
 import com.github.kozlm.theatre.model.client.ClientDto;
 import com.github.kozlm.theatre.model.ticket.BuyTicketRequest;
+import com.github.kozlm.theatre.model.ticket.MyTicketDto;
 import com.github.kozlm.theatre.model.ticket.Ticket;
 import com.github.kozlm.theatre.service.ClientService;
 import com.github.kozlm.theatre.service.TicketService;
@@ -25,13 +26,6 @@ public class UserController {
     private final TicketService ticketService;
     private final ClientService clientService;
 
-    @GetMapping(path = "/my-tickets")
-    @JsonView(Views.AdminView.class)
-    public List<Ticket> getMyTickets
-            (@AuthenticationPrincipal UserDetails userDetails) {
-        return clientService.getMyTickets(userDetails);
-    }
-
     @PostMapping(path = "/current-events/{eventId}/buy-ticket")
     @ResponseStatus(HttpStatus.OK)
     public void buyTicket(
@@ -40,6 +34,13 @@ public class UserController {
             @RequestBody @Valid BuyTicketRequest dto
     ) {
         ticketService.buyTicket(userDetails, eventId, dto);
+    }
+
+    @GetMapping(path = "/my-tickets")
+    @JsonView(Views.AdminView.class)
+    public List<MyTicketDto> getMyTickets
+            (@AuthenticationPrincipal UserDetails userDetails) {
+        return clientService.getMyTickets(userDetails);
     }
 
     @DeleteMapping(path = "/my-tickets/{id}")

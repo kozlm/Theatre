@@ -3,6 +3,7 @@ package com.github.kozlm.theatre.service;
 import com.github.kozlm.theatre.model.client.Address;
 import com.github.kozlm.theatre.model.client.Client;
 import com.github.kozlm.theatre.model.client.ClientDto;
+import com.github.kozlm.theatre.model.ticket.MyTicketDto;
 import com.github.kozlm.theatre.model.ticket.Ticket;
 import com.github.kozlm.theatre.repository.AddressRepository;
 import com.github.kozlm.theatre.repository.ClientRepository;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -29,10 +31,16 @@ public class ClientService {
                 new IllegalArgumentException("Did not find client with id: " + id));
     }
 
-    public List<Ticket> getMyTickets(UserDetails userDetails) {
+    public List<MyTicketDto> getMyTickets(UserDetails userDetails) {
         Client client = (Client) userDetails;
-        System.out.println(ticketRepository.findByClient(client).size());
-        return ticketRepository.findByClient(client);
+        List<Ticket> tickets = ticketRepository.findByClient(client);
+        return tickets.stream()
+                .map(ticket -> MyTicketDto.builder()
+                        .price(ticket.getPrice())
+                        .place(ticket.getPlace())
+                        .event(ticket.getEvent())
+                        .build())
+                .toList();
     }
 
     public Client getMyInformation(UserDetails userDetails) {
