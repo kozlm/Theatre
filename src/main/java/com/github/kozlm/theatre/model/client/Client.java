@@ -1,5 +1,6 @@
 package com.github.kozlm.theatre.model.client;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.github.kozlm.theatre.model.ticket.Ticket;
@@ -47,6 +48,8 @@ public class Client implements UserDetails {
     private String password;
 
     @Column(name = "DateOfBirth")
+    @JsonFormat(shape = JsonFormat.Shape.STRING,
+            pattern = "dd-MM-yyyy")
     private Date dateOfBirth;
 
     @ManyToOne(cascade = CascadeType.ALL)

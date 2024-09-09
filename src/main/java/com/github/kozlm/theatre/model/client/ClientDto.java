@@ -1,5 +1,6 @@
 package com.github.kozlm.theatre.model.client;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.github.kozlm.theatre.validation.FieldsEmptyOrFilled;
 import jakarta.validation.constraints.*;
 import lombok.*;
@@ -34,6 +35,8 @@ public class ClientDto {
     private String password;
 
     @Past
+    @JsonFormat(shape = JsonFormat.Shape.STRING,
+            pattern = "dd-MM-yyyy")
     private Date dateOfBirth;
 
     @Pattern(regexp = "^[0-9]{2}-[0-9]{3}$")

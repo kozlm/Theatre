@@ -6,6 +6,12 @@ spring.datasource.driver-class-name=com.microsoft.sqlserver.jdbc.SQLServerDriver
 
 #JPA
 spring.jpa.show-sql=true
-spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.SQLServer2012Dialect
 spring.jpa.hibernate.naming.physical-strategy=org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+spring.jpa.open-in-view=true
 spring.jpa.hibernate.ddl-auto=update
+
+#Application
+application.security.jwt.secret-key=D41F853EE98027460F61D445A88147405A11ED2D8872E9CFABACB49CD50EBD32
+application.security.jwt.expiration-in-millis=3600000
+application.security.admin-username=admin
+application.security.admin-password=admin
