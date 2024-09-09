@@ -35,7 +35,7 @@ Handlers.
 ## Installation
 1. Clone the repository and go to the project directory:
    ```bash
-   git clone https://github.com/your-username/theatre-application.git
+   git clone https://github.com/kozlm/Theatre.git
    cd theatre
     ```
 2. Configure [application properties example file](src/main/resources/application.properties.example) 
