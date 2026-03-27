@@ -83,7 +83,6 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjbGllQGVudC5jb20iLCJpYXQiO
 
 <!---
 ## To-Do
-- ~~add JWT-based security~~ 
 - expand Swagger documentation
 - add validation exception messages
 - add tests
